@@ -3,6 +3,7 @@ package com.santu.crowd.mvc.config;
 import com.google.gson.Gson;
 import com.santu.crowd.constant.CrowdConstant;
 import com.santu.crowd.exception.LoginAcctAlreadyInUseException;
+import com.santu.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
 import com.santu.crowd.exception.LoginFailedException;
 import com.santu.crowd.util.CrowdUtil;
 import com.santu.crowd.util.ResultEntity;
@@ -21,7 +22,6 @@ import java.io.IOException;
 //注解标明该类是基于注解的异常处理器类（实测，注解版异常处理比xml版本优先生效）
 @ControllerAdvice
 public class CrowdExceptionResolver {
-
     // 触发登录失败异常，则继续返回登陆页面
     @ExceptionHandler(value = LoginFailedException.class)
     public ModelAndView resolverLoginFailedException(
@@ -37,6 +37,15 @@ public class CrowdExceptionResolver {
             LoginAcctAlreadyInUseException exception, HttpServletRequest request,
             HttpServletResponse response) throws IOException {
         String viewName = "admin-add";
+        return commonCode(exception,request,response,viewName);
+    }
+
+    // 更新管理员时，login_acct已存在，则返回admin-update.jsp页面
+    @ExceptionHandler(value = LoginAcctAlreadyInUseForUpdateException.class)
+    public ModelAndView LoginAcctAlreadyInUseForUpdateException(
+            LoginAcctAlreadyInUseForUpdateException exception, HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
+        String viewName = "system-error";
         return commonCode(exception,request,response,viewName);
     }
 

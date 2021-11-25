@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.santu.crowd.constant.CrowdConstant;
 import com.santu.crowd.entity.Admin;
 import com.santu.crowd.exception.LoginAcctAlreadyInUseException;
+import com.santu.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
 import com.santu.crowd.service.api.AdminService;
 import com.santu.crowd.util.CrowdUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,4 +80,23 @@ public class AdminHander {
         return "redirect:/admin/get/page.html?pageNum="+Integer.MAX_VALUE;
     }
 
+    @RequestMapping("/admin/update.html")
+    public String updateAdmin(Admin admin){
+        try{
+            adminService.updateAdmin(admin);
+        }catch (Exception e){
+            e.printStackTrace();
+            if(e instanceof org.springframework.dao.DuplicateKeyException){
+                throw new LoginAcctAlreadyInUseForUpdateException(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_UES);
+            }
+        }
+        return "redirect:/admin/get/page.html";
+    }
+
+    @RequestMapping("/admin/to/update/page.html")
+    public String updateAdmin(@RequestParam("adminId") int id, ModelMap modelMap){
+        Admin admin = adminService.getAdminById(id);
+        modelMap.addAttribute(admin);
+        return "admin-update";
+    }
 }

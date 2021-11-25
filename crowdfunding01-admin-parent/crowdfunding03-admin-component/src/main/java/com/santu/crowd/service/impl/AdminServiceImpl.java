@@ -31,6 +31,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public int updateAdmin(Admin admin) {
+        return adminMapper.updateByPrimaryKeySelective(admin);
+    }
+
+    @Override
     public List<Admin> getAll() {
         return adminMapper.selectByExample(new AdminExample());
     }
@@ -68,5 +73,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Integer removeAdminByID(Integer id) {
         return adminMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public Admin getAdminById(int id) {
+        return adminMapper.selectByPrimaryKey(id);
     }
 }

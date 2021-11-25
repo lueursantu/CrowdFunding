@@ -22,7 +22,6 @@
                             <input type="text" class="form-control" id="loginAcct" name="loginAcct" placeholder="请输入登陆账号">
                         </div>
                         <div class="form-group">
-                            <label for="userPswd">登陆密码</label><p>${pageContext.exception.message}</p>
                             <input type="password" class="form-control" id="userPswd" name="userPswd" placeholder="请输入登陆账号">
                         </div>
                         <div class="form-group">

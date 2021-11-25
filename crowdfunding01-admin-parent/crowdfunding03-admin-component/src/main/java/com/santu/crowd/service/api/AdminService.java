@@ -10,7 +10,11 @@ import java.util.List;
  * @date 2021/11/12 10:04
  */
 public interface AdminService {
+
     public int saveAdmin(Admin admin);
+
+    public int updateAdmin(Admin admin);
+
     public List<Admin> getAll();
 
     Admin getAdminByLoginAcct(String loginAcct, String userPswd);
@@ -18,4 +22,6 @@ public interface AdminService {
     PageInfo<Admin> getPageInfo(String keyword, Integer pageNum, Integer pageSize);
 
     Integer removeAdminByID(Integer id);
+
+    Admin getAdminById(int id);
 }

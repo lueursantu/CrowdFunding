@@ -89,8 +89,11 @@
                                         <td>${admin.email}</td>
                                         <td>
                                             <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-                                            <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-                                            <a class="btn btn-danger btn-xs" href="admin/remove/${admin.id}/${pageInfo.pageNum}/${param.keyword}.html"><i class=" glyphicon glyphicon-remove"></i></a>
+                                            <a class="btn btn-primary btn-xs"
+                                               href="admin/to/update/page.html?adminId=${admin.id}">
+                                                <i class=" glyphicon glyphicon-pencil"></i></a>
+                                            <a class="btn btn-danger btn-xs" href="admin/remove/${admin.id}/${pageInfo.pageNum}/${param.keyword}.html">
+                                                <i class=" glyphicon glyphicon-remove"></i></a>
                                         </td>
                                     </tr>
                                 </c:forEach>
