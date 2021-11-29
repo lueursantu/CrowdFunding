@@ -1,6 +1,8 @@
 import com.santu.crowd.entity.Admin;
+import com.santu.crowd.entity.Role;
 import com.santu.crowd.mapper.AdminMapper;
 import com.santu.crowd.service.api.AdminService;
+import com.santu.crowd.service.api.RoleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -30,6 +32,9 @@ public class CrowdTest {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    RoleService roleService;
 
     @Test
     public void saveAdminTest(){
@@ -65,5 +70,11 @@ public class CrowdTest {
     public void insertItemToAdmin(){
         for(int i=0;i<247;i++)
             adminService.saveAdmin(new Admin(null, "la"+i, "up"+i, "un"+i, "em"+i, "cm"+i));
+    }
+
+    @Test
+    public void insertItemToRole(){
+        for(int i=0;i<65;i++)
+            roleService.saveRole(new Role(null, "name"+i));
     }
 }

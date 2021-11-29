@@ -9,4 +9,6 @@ import com.santu.crowd.entity.Role;
  */
 public interface RoleService {
     PageInfo<Role> getPageInfo(Integer pageNum, Integer pageSize, String Keyword);
+
+    int saveRole(Role role);
 }

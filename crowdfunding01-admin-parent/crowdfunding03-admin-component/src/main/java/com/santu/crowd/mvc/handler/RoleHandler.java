@@ -20,6 +20,12 @@ public class RoleHandler {
     RoleService roleService;
 
     @ResponseBody
+    @RequestMapping("/save/role.json")
+    public int saveRole(@RequestParam("roleName") String roleName){
+        return roleService.saveRole(new Role(null, roleName));
+    }
+
+    @ResponseBody
     @RequestMapping("/role/get/page/info.json")
     public ResultEntity<PageInfo<Role>> getPageInfo(
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,

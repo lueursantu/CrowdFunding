@@ -36,7 +36,7 @@
 <!--    &lt;!&ndash;前往注册admin页面&ndash;&gt;-->
     <mvc:view-controller path="/admin/to/add/page.html" view-name="admin-add"/>
 <!--    &lt;!&ndash; 前往角色维护页面 &ndash;&gt;-->
-<!--    <mvc:view-controller path="/role/to/page.html" view-name="role-page"/>-->
+    <mvc:view-controller path="/role/to/page.html" view-name="role-page"/>
 <!--    &lt;!&ndash; 前往菜单维护页面 &ndash;&gt;-->
 <!--    <mvc:view-controller path="/menu/to/page.html" view-name="menu-page"/>-->
 
