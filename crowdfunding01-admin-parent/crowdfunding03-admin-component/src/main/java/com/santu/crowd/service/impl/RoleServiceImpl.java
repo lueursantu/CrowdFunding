@@ -3,6 +3,7 @@ package com.santu.crowd.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.santu.crowd.entity.Role;
+import com.santu.crowd.entity.RoleExample;
 import com.santu.crowd.mapper.RoleMapper;
 import com.santu.crowd.service.api.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +31,26 @@ public class RoleServiceImpl implements RoleService {
     public int saveRole(Role role) {
         return roleMapper.insert(role);
     }
+
+    @Override
+    public int updateRole(Role role) {
+        roleMapper.updateByPrimaryKey(role);
+        return 1;
+    }
+
+    @Override
+    public int removeRole(List<Integer> roleIdList) {
+
+        RoleExample roleExample = new RoleExample();
+
+        // 获取Criteria对象
+        RoleExample.Criteria criteria = roleExample.createCriteria();
+
+        // 使用Criteria封装查询条件
+        criteria.andIdIn(roleIdList);
+
+        return roleMapper.deleteByExample(roleExample);
+    }
+
+
 }

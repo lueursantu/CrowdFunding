@@ -6,9 +6,12 @@ import com.santu.crowd.service.api.RoleService;
 import com.santu.crowd.util.ResultEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * @author Santu
@@ -20,9 +23,40 @@ public class RoleHandler {
     RoleService roleService;
 
     @ResponseBody
+    @RequestMapping("/remove/role.json")
+    public ResultEntity removeRole(@RequestBody List<Integer> roleIdList){
+        try {
+            roleService.removeRole(roleIdList);
+            return ResultEntity.successWithoutData();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultEntity.failed(e.getMessage());
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("/update/role.json")
+    public ResultEntity updateRole(@RequestParam("roleId") int id,
+                                   @RequestParam("roleName") String roleName){
+        try {
+            roleService.updateRole(new Role(id, roleName));
+            return ResultEntity.successWithoutData();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultEntity.failed(e.getMessage());
+        }
+    }
+
+    @ResponseBody
     @RequestMapping("/save/role.json")
-    public int saveRole(@RequestParam("roleName") String roleName){
-        return roleService.saveRole(new Role(null, roleName));
+    public ResultEntity saveRole(@RequestParam("roleName") String roleName) {
+        try {
+            roleService.saveRole(new Role(null, roleName));
+            return ResultEntity.successWithoutData();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultEntity.failed(e.getMessage());
+        }
     }
 
     @ResponseBody
@@ -32,7 +66,7 @@ public class RoleHandler {
             @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
             @RequestParam(value = "keyword", defaultValue = "") String keyword){
 
-            PageInfo<Role> PageInfo = roleService.getPageInfo(pageNum, pageSize, keyword);
-            return ResultEntity.successWithData(PageInfo);
+        PageInfo<Role> PageInfo = roleService.getPageInfo(pageNum, pageSize, keyword);
+        return ResultEntity.successWithData(PageInfo);
     }
 }

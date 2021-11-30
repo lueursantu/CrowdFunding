@@ -18,8 +18,8 @@ public class ResultEntity<T> {
     private String result;
 
     //第一个<Type>表示声明一个泛型Type，第二个和return中的<Type>表示使用该泛型
-    public static <Type> ResultEntity<Type> successWithoutData(){
-        return new ResultEntity<Type>(null,null,SUCCESS);
+    public static ResultEntity successWithoutData(){
+        return new ResultEntity(null,null,SUCCESS);
     }
 
     public static <Type> ResultEntity<Type> successWithData(Type data){

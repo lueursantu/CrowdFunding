@@ -17,8 +17,6 @@ function getPageInfoRemote(){
         "dateType": "json",
         "async": false
     });
-    console.log(ajaxResult);
-    console.log(ajaxResult.status);
     var stateCode = ajaxResult.status;
     if(stateCode != 200){
         layer.msg("失败！响应状态码："+stateCode+" 说明信息："+ajaxResult.statusText);
@@ -30,7 +28,6 @@ function getPageInfoRemote(){
 
     // 从resultEntity取得result属性
     var result = resultEntity.result;
-
     // 判断result是否是FAILED
     if (result == "FAILED") {
         // 显示失败的信息
@@ -113,4 +110,14 @@ function paginationCallBack(pageIndex, jQuery) {
 
     // 取消当前超链接的默认行为
     return false;
+}
+
+// 删除角色时弹出模态框函数
+function showDeleteModel(roleList){
+    window.roleList = roleList;
+    $("#deleteModel #roleNameList").empty();
+    $("#deleteModel").modal("show");
+    $.each(roleList,function() {
+        $("#deleteModel #roleNameList").append(this.roleName + "<br>");
+    });
 }
