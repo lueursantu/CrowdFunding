@@ -76,7 +76,15 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Admin getAdminById(int id) {
+    public Admin getAdminById(Integer id) {
         return adminMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public int saveAdminRoleRelationship(Integer adminId, List<Integer> roleIdList) {
+        adminMapper.deleteAdminRoleRelationship(adminId);
+        adminMapper.insertAdminRoleRelationship(adminId, roleIdList);
+        return 0;
+    }
+
 }

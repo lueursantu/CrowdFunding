@@ -30,7 +30,7 @@
                 "data": {
                     "roleName": roleName
                 },
-                "dateType": "json",
+                "dataType": "json",
                 "success": function (response){
                     if(response.result == "SUCCESS"){
                         layer.msg("操作成功！");
@@ -69,7 +69,7 @@
                     "roleId": window.roleId,
                     "roleName": roleName
                 },
-                "dateType": "json",
+                "dataType": "json",
                 "success": function (response){
                     if(response.result == "SUCCESS"){
                         layer.msg("操作成功！");
@@ -102,7 +102,7 @@
                 "url": "remove/role.json",
                 "type": "post",
                 "data": roleIdListJson,
-                "dateType": "json",
+                "dataType": "json",
                 "contentType": "application/json;charset=UTF-8",
                 "success": function (response){
                     if(response.result == "SUCCESS"){
@@ -118,7 +118,6 @@
                 }
             });
             $("#deleteModel").modal("hide");
-
         });
 
         // 列表项上的单个删除按钮

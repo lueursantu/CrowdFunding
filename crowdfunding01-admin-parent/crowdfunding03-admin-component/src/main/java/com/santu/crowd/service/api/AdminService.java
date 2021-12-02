@@ -23,5 +23,7 @@ public interface AdminService {
 
     Integer removeAdminByID(Integer id);
 
-    Admin getAdminById(int id);
+    Admin getAdminById(Integer id);
+
+    int saveAdminRoleRelationship(Integer adminId, List<Integer> roleIdList);
 }
