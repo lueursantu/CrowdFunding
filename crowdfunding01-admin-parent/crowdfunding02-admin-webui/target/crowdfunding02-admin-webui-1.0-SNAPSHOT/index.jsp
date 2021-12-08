@@ -41,6 +41,6 @@
     <form method="get" action="test/md5.html">
         测试MD5：<input name="md5_str" type="text"> <input type="submit">
     </form>
-    <a href="admin/login/page.html">管理员登录页面</a>
+    <a href="admin/to/login/page.html">管理员登录页面</a>
 </body>
 </html>

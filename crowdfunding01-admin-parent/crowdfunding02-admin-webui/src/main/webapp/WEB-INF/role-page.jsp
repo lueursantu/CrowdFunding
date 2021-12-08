@@ -3,6 +3,8 @@
 <html lang="zh-CN">
 <%@include file="include-head.jsp" %>
 <link rel="stylesheet" href="css/pagination.css"/>
+<link rel="stylesheet" href="ztree/zTreeStyle.css"/>
+<script type="text/javascript" src="ztree/jquery.ztree.all-3.5.min.js"></script>
 <script type="text/javascript" src="crowd/role-page.js"></script>
 <script type="text/javascript" src="jquery/jquery.pagination.js"></script>
 <script type="text/javascript">
@@ -160,6 +162,46 @@
             showDeleteModel(roleList);
         });
 
+        // 给分配权限按钮绑定单机响应函数
+        $("#rolePageTBody").on("click", ".checkBtn", function (){
+            window.roleId = this.id;
+            fillAuthTree();
+           $("#assignModal").modal("show");
+        });
+
+        // 给提交权限按钮绑定相应单击响应函数
+        $("#assignBtn").click(function (){
+            var authIdList = [];
+            var zTreeObj = $.fn.zTree.getZTreeObj("authTreeDemo");
+            var authArray = zTreeObj.getCheckedNodes();
+            for (var i = 0; i < authArray.length; i++){
+                authIdList.push(authArray[i].id);
+            }
+            var requestBody = {
+                "roleId": [window.roleId],
+                "authIdList": authIdList
+            }
+            var requestJson = JSON.stringify(requestBody);
+
+            $.ajax({
+                "url": "assign/do/save/role/auth/relationship.json",
+                "type": "post",
+                "data": requestJson,
+                "contentType": "application/json;charset=UTF-8",
+                "dataType": "json",
+                "success": function (response){
+                    if(response.result == "SUCCESS"){
+                        layer.msg("操作成功！");
+                    }else{
+                        layer.msg("操作失败！"+response.message);
+                    }
+                },
+                "error": function (response){
+                    layer.msg(response.status+" "+response.statusText);
+                }
+            });
+            $("#assignModal").modal("hide");
+        });
     });
 </script>
 <body>
@@ -215,5 +257,6 @@
 <%@include file="modal-role-add.jsp"%>
 <%@include file="modal-role-edit.jsp"%>
 <%@include file="modal-role-delete.jsp"%>
+<%@include file="modal-role-assign-auth.jsp"%>
 </body>
 </html>

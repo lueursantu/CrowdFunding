@@ -30,9 +30,9 @@
 
 <!--    &lt;!&ndash;通过view-controller 来设置一些直接的页面跳转&ndash;&gt;-->
 <!--    &lt;!&ndash;去登录页面&ndash;&gt;-->
-    <mvc:view-controller path="/admin/login/page.html" view-name="admin-login"/>
+    <mvc:view-controller path="/admin/to/login/page.html" view-name="admin-login"/>
 <!--    &lt;!&ndash;去登录成功的主页面&ndash;&gt;-->
-    <mvc:view-controller path="/admin/main/page.html" view-name="admin-main"/>
+    <mvc:view-controller path="/admin/to/main/page.html" view-name="admin-main"/>
 <!--    &lt;!&ndash;前往注册admin页面&ndash;&gt;-->
     <mvc:view-controller path="/admin/to/add/page.html" view-name="admin-add"/>
 <!--    &lt;!&ndash; 前往角色维护页面 &ndash;&gt;-->
@@ -40,9 +40,12 @@
 <!--    &lt;!&ndash; 前往菜单维护页面 &ndash;&gt;-->
     <mvc:view-controller path="/menu/to/page.html" view-name="menu-page"/>
 
+    <mvc:view-controller path="/index.html" view-name="admin-login"/>
+
+
 
     <!--在mvc容器中注册拦截器 ： 在使用SpringSecurity后，就要注释掉原来的自定义的拦截器了-->
-    <mvc:interceptors>
+    <!--<mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/admin/login/page.html"/>
@@ -50,6 +53,6 @@
             <mvc:exclude-mapping path="/admin/do/login.html"/>
             <bean class="com.santu.crowd.mvc.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors>-->
 
 </beans>

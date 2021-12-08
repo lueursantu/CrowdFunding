@@ -10,6 +10,7 @@ public class CrowdConstant {
     public static final String MESSAGE_SYSTEM_ERROR_LOGIN_NOT_UNIQUE = "错误！数据库中存在重复数据！";
     public static final String MESSAGE_ACCESS_FORBIDDEN = "还未登录，禁止访问受保护资源！";
     public static final String MESSAGE_LOGIN_ACCT_ALREADY_IN_UES = "抱歉，这个账号已经被使用！";
+    public static final String MESSAGE_ACCESS_DENIED = "对不起，您没有访问权限！";
 
     public static final String ATTR_NAME_EXCEPTION = "exception";
     public static final String ATTR_NAME_LOGIN_ADMIN = "loginAdmin";

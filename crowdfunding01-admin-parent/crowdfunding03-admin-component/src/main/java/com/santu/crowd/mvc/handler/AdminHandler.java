@@ -8,6 +8,8 @@ import com.santu.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
 import com.santu.crowd.service.api.AdminService;
 import com.santu.crowd.util.CrowdUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +29,9 @@ public class AdminHandler {
 
     @Autowired
     AdminService adminService;
+
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
 
     @RequestMapping("/admin/do/login.html")
     public String doLongin(@RequestParam("loginAcct")String loginAcct,
@@ -64,10 +69,12 @@ public class AdminHandler {
         return "redirect:/admin/get/page.html?pageNum="+pageNum+"&keyword="+keyword;
     }
 
+    @PreAuthorize("hasAuthority('user:save')")
     @RequestMapping("/admin/add.html")
     public String addAdmin(Admin admin){
         try{
-            admin.setUserPswd(CrowdUtil.md5(admin.getUserPswd()));
+            // admin.setUserPswd(CrowdUtil.md5(admin.getUserPswd()));
+            admin.setUserPswd(passwordEncoder.encode(admin.getUserPswd()));
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String dateNowStr = sdf.format(new Date());
             admin.setCreateTime(dateNowStr);

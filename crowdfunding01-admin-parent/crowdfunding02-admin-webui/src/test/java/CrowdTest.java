@@ -1,6 +1,7 @@
 import com.santu.crowd.entity.Admin;
 import com.santu.crowd.entity.Role;
 import com.santu.crowd.mapper.AdminMapper;
+import com.santu.crowd.mapper.AuthMapper;
 import com.santu.crowd.service.api.AdminService;
 import com.santu.crowd.service.api.RoleService;
 import org.junit.Test;
@@ -8,12 +9,14 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author Santu
@@ -35,6 +38,9 @@ public class CrowdTest {
 
     @Autowired
     RoleService roleService;
+
+    @Autowired
+    AuthMapper authMapper;
 
     @Test
     public void saveAdminTest(){
@@ -77,4 +83,19 @@ public class CrowdTest {
         for(int i=0;i<65;i++)
             roleService.saveRole(new Role(null, "name"+i));
     }
+
+    @Test
+    public void testSql(){
+        Integer roleId = 3;
+        List<Integer> authIdList = authMapper.selectAssignedAuthIdByRoleId(roleId);
+        System.out.println(authIdList);
+    }
+
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Test
+    public void getPassword(){
+        System.out.println(bCryptPasswordEncoder.encode("123456"));
+    }
+
 }
