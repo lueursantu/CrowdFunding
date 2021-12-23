@@ -9,15 +9,22 @@
         <option value="$PROJECT_DIR$/crowdfunding01-admin-parent/pom.xml" />
         <option value="$PROJECT_DIR$/crowdfunding05-common-util/pom.xml" />
         <option value="$PROJECT_DIR$/crowdfunding06-common-reverse/pom.xml" />
+        <option value="$PROJECT_DIR$/crowdfunding07-member-parent/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/crowdfunding01-admin-parent/crowdfunding02-admin-webui/pom.xml" />
+        <option value="$PROJECT_DIR$/crowdfunding07-member-parent/crowdfunding07-member-authentication-consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/crowdfunding07-member-parent/crowdfunding07-member-entity/pom.xml" />
+        <option value="$PROJECT_DIR$/crowdfunding07-member-parent/crowdfunding07-member-eureka/pom.xml" />
+        <option value="$PROJECT_DIR$/crowdfunding07-member-parent/crowdfunding07-member-mysql-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/crowdfunding07-member-parent/crowdfunding07-member-redis-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/crowdfunding07-member-parent/untitled/pom.xml" />
       </set>
     </option>
   </component>
-  <component name="ProjectRootManager">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
