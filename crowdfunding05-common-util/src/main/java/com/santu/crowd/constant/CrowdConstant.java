@@ -11,15 +11,16 @@ public class CrowdConstant {
     public static final String MESSAGE_ACCESS_FORBIDDEN = "还未登录，禁止访问受保护资源！";
     public static final String MESSAGE_LOGIN_ACCT_ALREADY_IN_UES = "抱歉，这个账号已经被使用！";
     public static final String MESSAGE_ACCESS_DENIED = "对不起，您没有访问权限！";
+    public static final String MESSAGE_CODE_NOT_EXIST = "验证码无效！请检查是否输入了正确的手机号";
+    public static final String MESSAGE_CODE_INVALID = "验证码错误";
 
     public static final String ATTR_NAME_EXCEPTION = "exception";
     public static final String ATTR_NAME_LOGIN_ADMIN = "loginAdmin";
     public static final String ATTR_NAME_PAGE_INFO = "pageInfo";
+    public static final String ATTR_REDIS_CODE_PREFIX = "REDIS_CODE_PREFIX_";
 
     public static final String REDIS_CODE_PREFIX = "REDIS_CODE_PREFIX" ;
     public static final String ATTR_NAME_MESSAGE = "message";
-    public static final String MESSAGE_CODE_NOT_EXIST = "验证码无效！请检查是否输入了正确的手机号";
-    public static final String MESSAGE_CODE_INVALID = "验证码错误";
     public static final String ATTR_NAME_LOGIN_MEMBER = "loginMember";
     public static final String MESSAGE_HEADER_PIC_EMPTY = "头图不能为空！";
     public static final String MESSAGE_HEADER_PIC_UPLOAD_FAILED = "头图上传失败，请重试！";

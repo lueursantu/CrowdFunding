@@ -3,5 +3,10 @@
 /crowdfunding01-admin-parent/crowdfunding04-admin-entity/target/
 /crowdfunding05-common-util/target/
 /crowdfunding06-common-reverse/target/
-.idea
+target
+target/*
+.idea/
+*.iml
+*.iws
+santuEmail.properties
 

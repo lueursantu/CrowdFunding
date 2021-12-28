@@ -40,4 +40,10 @@ public class MemberServiceImpl implements MemberService {
         MemberPO memberPO = memberPOS.get(0);
         return memberPO;
     }
+
+    @Override
+    @Transactional()
+    public Integer saveMemberPO(MemberPO memberPO) {
+        return memberPOMapper.insertSelective(memberPO);
+    }
 }

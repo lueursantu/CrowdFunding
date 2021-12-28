@@ -1,0 +1,19 @@
+server:
+  port: 80
+spring:
+  application:
+    name: crowd-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka
+zuul:
+  ignored-services: "*"       # 表示忽视直接通过application-name访问微服务，必须通过route
+  sensitive-headers: "*"      # 在Zuul向其他微服务重定向时，保持原本的头信息（请求头、响应头）
+  routes:                     # 指定网关路由
+    crowd-protal:
+      service-id: crowd-authentication  # 对应application-name
+      path: /**               # 表示直接通过根路径访问，必须加上**，否则多层路径无法访问
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 10000

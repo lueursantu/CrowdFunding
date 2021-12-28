@@ -1,6 +1,7 @@
 package com.santu.crowd.service.api;
 
 import com.santu.crowd.entity.po.MemberPO;
+import com.santu.crowd.util.ResultEntity;
 
 /**
  * @author Santu
@@ -8,4 +9,5 @@ import com.santu.crowd.entity.po.MemberPO;
  */
 public interface  MemberService {
     MemberPO getMemberPOByLoginAcct(String loginAcct);
+    Integer saveMemberPO(MemberPO memberPO);
 }
