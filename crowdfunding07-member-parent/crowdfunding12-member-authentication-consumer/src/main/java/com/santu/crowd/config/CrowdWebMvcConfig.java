@@ -12,9 +12,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CrowdWebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        String urlPath = "/auth/member/to/reg/page.html";
-        String viewName = "member-reg";
+        // 注册页面
+        registry.addViewController("/auth/member/to/reg/page.html").setViewName("member-reg");
 
-        registry.addViewController(urlPath).setViewName(viewName);
+        // 登录页面
+        registry.addViewController("/auth/member/to/login/page.html").setViewName("member-login");
+
     }
 }

@@ -37,6 +37,9 @@ public class MemberServiceImpl implements MemberService {
 //        }
 
         // List非空，则返回第一个（因为LoginAcct是唯一的）
+        if(memberPOS==null || memberPOS.size()==0){
+            return null;
+        }
         MemberPO memberPO = memberPOS.get(0);
         return memberPO;
     }

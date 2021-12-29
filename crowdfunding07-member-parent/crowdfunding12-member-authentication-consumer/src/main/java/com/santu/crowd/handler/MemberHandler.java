@@ -4,6 +4,7 @@ import com.santu.crowd.api.MySQLRemoteService;
 import com.santu.crowd.api.RedisRemoteService;
 import com.santu.crowd.constant.CrowdConstant;
 import com.santu.crowd.entity.po.MemberPO;
+import com.santu.crowd.entity.vo.MemberLoginVO;
 import com.santu.crowd.entity.vo.MemberVO;
 import com.santu.crowd.util.CrowdUtil;
 import com.santu.crowd.util.ResultEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -82,8 +84,29 @@ public class MemberHandler {
             modelMap.addAttribute("message", mySqlResult.getMessage());
             return "member-reg";
         }
-        return "member-login";
+        return "redirect:/auth/member/to/login/page.html";
     }
 
+    @RequestMapping("/auth/member/do/Login.html")
+    public String authMemberDoLogin(@RequestParam("loginAcct") String loginAcct,
+                                    @RequestParam("userPswd") String userPswd,
+                                    HttpSession session, ModelMap modelMap){
+        ResultEntity<MemberPO> resultEntity = mySQLRemoteService.getMemberPOByLoginAcctRemote(loginAcct);
+        MemberPO memberPO = resultEntity.getData();
+        String dbPswd = memberPO.getUserPswd();
 
+        // 匹配密码
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        boolean matches = passwordEncoder.matches(userPswd, dbPswd);
+        if(!matches){
+            modelMap.addAttribute("message", CrowdConstant.MESSAGE_MEMBER_FAILED);
+            return "member-login";
+        }
+
+        MemberLoginVO memberLoginVO = new MemberLoginVO(memberPO.getId(), memberPO.getUsername(), memberPO.getEmail());
+        session.setAttribute(CrowdConstant.ATTR_NAME_LOGIN_MEMBER, memberLoginVO);
+
+        return "redirect:/";
+
+    }
 }
