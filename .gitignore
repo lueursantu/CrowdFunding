@@ -9,4 +9,5 @@ target/*
 *.iml
 *.iws
 santuEmail.properties
+/crowdfunding07-member-parent/crowdfunding13-member-project-consumer/src/main/resources/application.yml
 
