@@ -16,9 +16,8 @@ eureka:
       defaultZone: http://localhost:1000/eureka
 aliyun:
   oss:
-    access-key-id: LTAI5tDYqrKh186t7KzQaczh
-    access-key-secret: E2Vm1syLsOvaT3hNVvr5RhF573rMjK
+    access-key-id: LTAI5tEgneRvciAK48sFfRP1
+    access-key-secret: qUzVCghIcTQUroBW3dhnLzjEosnG83
     bucket-domain: santu-oss.oss-cn-qingdao.aliyuncs.com
     bucket-name: santu-oss
     end-point: oss-cn-qingdao.aliyuncs.com
-asdfasdfasdfasd
