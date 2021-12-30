@@ -1,0 +1,23 @@
+server:
+  port: 5000
+spring:
+  application:
+    name: crowd-project
+  redis:
+    host: 8.130.22.91
+  session:
+    store-type: redis
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka
+aliyun:
+  oss:
+    access-key-id: LTAI5tDYqrKh186t7KzQaczh
+    access-key-secret: E2Vm1syLsOvaT3hNVvr5RhF573rMjK
+    bucket-domain: santu-oss.oss-cn-qingdao.aliyuncs.com
+    bucket-name: santu-oss
+    end-point: oss-cn-qingdao.aliyuncs.com

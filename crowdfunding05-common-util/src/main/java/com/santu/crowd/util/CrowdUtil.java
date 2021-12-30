@@ -1,5 +1,9 @@
 package com.santu.crowd.util;
 
+import com.aliyun.oss.OSS;
+import com.aliyun.oss.OSSClientBuilder;
+import com.aliyun.oss.common.comm.ResponseMessage;
+import com.aliyun.oss.model.PutObjectResult;
 import com.santu.crowd.constant.CrowdConstant;
 import com.santu.crowd.exception.LoginFailedException;
 import com.sun.mail.util.MailSSLSocketFactory;
@@ -13,8 +17,11 @@ import java.math.BigInteger;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
+import java.util.UUID;
 import javax.mail.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapters;
 
@@ -158,5 +165,81 @@ public class CrowdUtil {
     @Test
     public void testMail() {
         sendShortMessage("1812553272@qq.com");
+    }
+
+    /**
+     * 上传文件到oss
+     * @param endPoint
+     * @param accessKeyId
+     * @param accessKeySecret
+     * @param inputStream
+     * @param bucketName
+     * @param bucketDomain
+     * @param originalName
+     * @return
+     */
+    public static ResultEntity<String> uploadFileToOSS(
+            String endPoint,
+            String accessKeyId,
+            String accessKeySecret,
+            InputStream inputStream,
+            String bucketName,
+            String bucketDomain,
+            String originalName ){
+
+        // 创建OSSClient实例
+        OSS ossClient = new OSSClientBuilder().build(endPoint,accessKeyId,accessKeySecret);
+
+        // 生成上传文件的目录，按照日期来划分目录
+        String folderName = new SimpleDateFormat("yyyyMMdd").format(new Date());
+
+        // 生成上传文件在OSS服务器上保存的文件名,通过uuid生成随机uuid，将其中的“-”删去（替换成空字符串）
+        String fileMainName = UUID.randomUUID().toString().replace("-", "");
+
+        // 从原始文件名中获取文件扩展名
+        String extensionName = originalName.substring(originalName.lastIndexOf("."));
+
+        // 使用目录、文件主体名称、文件扩展名拼接得到对象名称
+        String objectName = folderName + "/" + fileMainName + extensionName;
+
+
+        try {
+            // 调用OSS客户端对象的方法上传文件并获取响应结果数据
+            PutObjectResult putObjectResult = ossClient.putObject(bucketName,objectName,inputStream);
+
+            // 从响应结果中获取具体的响应消息
+            ResponseMessage responseMessage = putObjectResult.getResponse();
+
+            // 根据响应状态判断是否成功
+            if (responseMessage == null) {
+                // 拼接访问刚刚上传的文件的路径
+                String ossFileAccessPath = bucketDomain + "/" + objectName;
+
+                // 返回成功，并带上访问路径
+                return ResultEntity.successWithData(ossFileAccessPath);
+            }else {
+                // 获取响应状态码
+                int statusCode = responseMessage.getStatusCode();
+                // 没有成功 获取错误消息
+                String errorMessage = responseMessage.getErrorResponseAsString();
+
+                return ResultEntity.failed("当前响应状态码=" + statusCode + " 错误消息=" + errorMessage);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResultEntity.failed(e.getMessage());
+        } finally {
+            // 关闭OSSClient
+            ossClient.shutdown();
+        }
+
+    }
+
+    @Test
+    public void testOSS() throws FileNotFoundException {
+        InputStream is = new FileInputStream("D:\\Project\\JavaProjects\\CrowdFunding\\crowdfunding05-common-util\\src\\main\\resources\\asd.png");
+        uploadFileToOSS("https://oss-cn-qingdao.aliyuncs.com", "LTAI5tDYqrKh186t7KzQaczh",
+                "E2Vm1syLsOvaT3hNVvr5RhF573rMjK",is,
+                "santu-oss", "https://santu-oss.oss-cn-qingdao.aliyuncs.com", "asd.png");
     }
 }

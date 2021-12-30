@@ -87,7 +87,7 @@ public class MemberHandler {
         return "redirect:/auth/member/to/login/page.html";
     }
 
-    @RequestMapping("/auth/member/do/Login.html")
+    @RequestMapping("/auth/member/do/login.html")
     public String authMemberDoLogin(@RequestParam("loginAcct") String loginAcct,
                                     @RequestParam("userPswd") String userPswd,
                                     HttpSession session, ModelMap modelMap){
@@ -106,7 +106,12 @@ public class MemberHandler {
         MemberLoginVO memberLoginVO = new MemberLoginVO(memberPO.getId(), memberPO.getUsername(), memberPO.getEmail());
         session.setAttribute(CrowdConstant.ATTR_NAME_LOGIN_MEMBER, memberLoginVO);
 
-        return "redirect:/";
+        return "redirect:http://localhost/auth/member/to/center/page.html";
+    }
 
+    @RequestMapping("/auth/member/do/logout.html")
+    public String authMemberDoLogout(HttpSession session){
+        session.invalidate();
+        return "redirect:http://localhost/";
     }
 }
